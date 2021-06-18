@@ -1,9 +1,42 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %} {% block title %}Blog Home{% endblock title %} 
+{% block homeactive %} active {% endblock homeactive %} {% block body %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Welcome to IITB</h1>
+    <p class="lead">
+      You can see all the blogs created by the users on this platform.
+    </p>
+  </div>
+</div>
 
-{% block title %}Blog Home{% endblock title %}
+<div class="container">
+   {% for blog in allBlogs  %}
+  <div
+    class="
+      row
+      no-gutters
+      border
+      rounded
+      overflow-hidden
+      flex-md-row
+      mb-4
+      shadow-sm
+      h-md-250
+      position-relative
+    "
+  >
+    <div class="col p-4 d-flex flex-column position-static">
+      <strong class="d-inline-block mb-2 text-primary">by {{blog.author}}</strong>
+      <h3 class="mb-0">{{blog.title}}</h3>
+      <div class="mb-1 text-muted">{{blog.timeStamp}}</div>
+      <p class="card-text mb-auto">{{blog.content| truncatechars:200}}</p>
+      <a href="/blog/{{blog.sno}}" class="stretched-link">Continue reading</a>
+    </div>
+    <div class="col-auto d-none d-lg-block">
+          <img width="200" height="200" style="object-fit: cover" src="{{blog.urlToImage}}" alt="blog thumbnail" />
+    </div>
+  </div>
+     {% endfor %}
+</div>
 
-{% block body %}
-   <body>
-        
-   </body>
 {% endblock body %}

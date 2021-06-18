@@ -1,0 +1,121 @@
+{% extends 'base.html' %} {% block title %} Home {% endblock title %} 
+
+{% block articleactive %}active{% endblock articleactive %}
+
+{% block style %}
+<link rel="stylesheet" href="static/css/home.css" />
+{% endblock style %} 
+
+{% block body %} 
+{% for message in messages %}
+<div
+  class="alert mb-0 alert-{{message.tags}} alert-dismissible fade show"
+  role="alert"
+>
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Dashboard</h1>
+    <p class="lead">
+      You can see all the blogs created by you. You can edit any of your blog.
+    </p>
+    <hr class="my-4" />
+    <p>Click on the button to create new blog</p>
+    <a class="btn btn-primary btn-m" href="/blog/create" role="button"
+      >Create</a
+    >
+  </div>
+</div>
+
+<div class="container">
+  {% for blog in allBlogs %}
+  <div
+    class="
+      row
+      no-gutters
+      border
+      rounded
+      overflow-hidden
+      flex-md-row
+      mb-4
+      shadow-sm
+      h-md-250
+      position-relative
+    "
+  >
+    <div class="col p-4 d-flex flex-column position-static">
+      <strong class="d-inline-block mb-2 text-primary"
+        >by {{blog.author}}</strong
+      >
+      <h3 class="mb-0">{{blog.title}}</h3>
+      <div class="mb-1 text-muted">{{blog.timeStamp}}</div>
+      <p class="card-text mb-auto">{{blog.content| truncatechars:200}}</p>
+      <div class="mt-2">
+        <button
+          type="button"
+          class="btn btn-outline-danger btn-sm"
+          data-toggle="modal"
+          data-target="#blogDeleteModal"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+    <div class="col-auto d-none d-lg-block">
+      <img
+        width="200"
+        height="200"
+        style="object-fit: cover"
+        src="{{blog.urlToImage}}"
+        alt="blog thumbnail"
+      />
+    </div>
+  </div>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="blogDeleteModal"
+    tabindex="-1"
+    aria-labelledby="blogDeleteModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="blogDeleteModalLabel">Confirm Delete</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure, You want to delete this blog?
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <a href="/blog/dashboard/delete/{{blog.sno}}">
+            <button type="button" class="btn btn-danger">Delete</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock body %}

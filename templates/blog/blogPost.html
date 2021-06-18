@@ -1,9 +1,15 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %} {% block title %}Blog Post{% endblock title %} 
 
-{% block title %}Blog Post{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="static/css/blogPost.css" />
+{% endblock style %} 
 
 {% block body %}
-   <body>
-        
-   </body>
+<div class="container">
+  <img src="{{blog.urlToImage}}" alt="{{blog.author}}" />
+  <h5 class="mt-2">by <span>{{blog.author}}</span></h5>
+  <h5>Published At <span>{{blog.timeStamp}}</span></h5>
+  <h1 class="mt-2">{{blog.title}}</h1>
+  <p>{{blog.content}}</p>
+</div>
 {% endblock body %}

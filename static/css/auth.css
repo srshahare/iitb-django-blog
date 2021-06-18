@@ -1,0 +1,36 @@
+.signup-form {
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    background: #19aa8d;
+}
+
+.signup-card form {
+    width: 25vw;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+    padding: 2rem;
+    background: white;
+    border-radius: 4px;
+}
+
+.signup-card form p {
+    color: rgb(139, 139, 139);
+}
+
+.text-center {
+    color: white;
+    padding: 1rem;
+}
+
+.text-center > a {
+    color: white;
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 450px) {
+    .signup-card form {
+        width: 90vw;
+    }
+}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% block title %}Create Blog{% endblock title %} 
+
+{% block style %}
+<link rel="stylesheet" href="static/css/create.css" />
+{% endblock style %} 
+
+{% block body %}
+
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}" role="alert">
+  <P>{{message}}</P>
+  <a href="/blog/">Go To Home</a>
+</div>
+{% endfor %}
+
+<div class="container d-flex flex-column align-items-center">
+  <h2 class="mb-3 mt-2">Create Blog</h2>
+  <img
+    id="blog-preview-img"
+    src=""
+    alt="blog preview"
+  />
+  <form class="create-form" method="post" action="" >
+  {% csrf_token %}
+    <div class="form-group">
+      <input
+        name="url"
+        type="text"
+        onchange="changeImagePreview()"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="Url of image"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        name="title"
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="Title"
+      />
+    </div>
+    <div class="form-group">
+      <textarea
+        name="content"
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        placeholder="Blog Content..."
+        rows="5"
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Blog</button>
+  </form>
+
+
+<script>
+  const imgDiv = document.getElementById("blog-preview-img");
+  imgDiv.src = "https://autosdutriomphe.fr/wp-content/uploads/2018/04/default-image.png"
+  function changeImagePreview() {
+    const urlDiv = document.getElementById("exampleFormControlInput1").value;
+    imgDiv.src = urlDiv;
+  }
+</script>
+
+</div>
+
+{% endblock body %}

@@ -1,9 +1,38 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %} {% block title %} Home {% endblock title %} 
+{% block articleactive %}active{% endblock articleactive %}active 
 
-{% block title %}Home {% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="static/css/home.css" />
+{% endblock style %}
 
-{% block body %}
-   <body>
-        
-   </body>
+{% block body %} 
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Welcome to NewsAPI</h1>
+    <p class="lead">You will see all the articles from News API</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="container home-container">
+    {% for article in articles %}
+    <div class="article-item">
+      <a target="__blank" href="{{article.url}}">
+        <img src="{{article.urlToImage}}" />
+      </a>
+      <div class="article-info">
+          <h4>{{article.title| truncatechars:40}}</h4>
+        <p>{{article.description| truncatechars:100}}</p>
+        <p class="article-author">
+          by <a href="#">{{article.author}} </a> published in
+          <span>{{article.source.name}}</span>
+        </p>
+        <p>Published At: {{article.publishedAt}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
 {% endblock body %}
